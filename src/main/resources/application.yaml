@@ -1,0 +1,36 @@
+seimi:
+  crawler:
+    enabled: true
+  names:
+    - BusRealTime
+    - Line
+
+spring:
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url:
+      jdbc:h2:file:./bus_db
+    driver-class-name: org.h2.Driver
+    username: sa
+#    password: 111111
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+
+server:
+  port: 1111
