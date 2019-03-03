@@ -87,7 +87,7 @@ public class ServeController {
 
     @ApiOperation("获取车次的所有信息")
     @GetMapping("lines/{lineName}")
-    public Object getFuzzyStation(@PathVariable("lineName") String lineName) {
+    public Object getLineInfo(@PathVariable("lineName") String lineName) {
         Optional<Line> line = lineRepository.findById(lineName);
         if (!line.isPresent()) {
             return Ret.buildFailParam("车次不存在");
