@@ -54,7 +54,7 @@ public class BusRealTimeSrawler extends BaseCrawLer {
         if (busRealTimeRepository.existsById(busRealTimeId)) {
             busRealTimeRepository.deleteById(busRealTimeId);
         }
-        busRealTimeRepository.save(new BusRealTime(runTime, status, line, dir, stop, null,System.currentTimeMillis()));
+        busRealTimeRepository.save(new BusRealTime(runTime, status, line, dir, stop, null, System.currentTimeMillis()));
 
         log.info("BusRealTime {} {} {} >>> {} {}", line, dir, stop, runTime, status);
     }

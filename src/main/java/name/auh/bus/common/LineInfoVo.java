@@ -11,7 +11,10 @@ import java.util.List;
 @Data
 @Builder
 public class LineInfoVo {
+
     Line line;
+
     List<Station> station;
+
     List<Direction> direction;
 }

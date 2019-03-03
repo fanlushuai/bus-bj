@@ -100,7 +100,6 @@ public class ServeController {
                 , "获取成功");
     }
 
-
     private final static long TTL = 1000 * 6;
 
     @ApiOperation(value = "获取车辆的实时信息", notes = "该接口会请求目标网站，抓取实时结果，并且缓存几秒钟；第一次请求，会触发抓取，但是不会返回结果，需要前端发两次获取结果")
