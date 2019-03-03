@@ -5,11 +5,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import name.auh.bus.common.LineInfoVo;
 import name.auh.bus.common.Ret;
-import name.auh.bus.data.bean.BusRealTime;
-import name.auh.bus.data.bean.BusRealTimeId;
-import name.auh.bus.data.bean.Station;
-import name.auh.bus.data.bean.StationId;
+import name.auh.bus.data.bean.*;
 import name.auh.bus.data.repository.BusRealTimeRepository;
 import name.auh.bus.data.repository.DirectionRepository;
 import name.auh.bus.data.repository.LineRepository;
@@ -20,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Api(description = "对外服务接口")
@@ -85,6 +84,22 @@ public class ServeController {
             return Ret.buildFailParam("车次不存在");
         }
     }
+
+    @ApiOperation("获取车次的所有信息")
+    @GetMapping("lines/{lineName}")
+    public Object getFuzzyStation(@PathVariable("lineName") String lineName) {
+        Optional<Line> line = lineRepository.findById(lineName);
+        if (!line.isPresent()) {
+            return Ret.buildFailParam("车次不存在");
+        }
+        List<Station> stationsByLine = stationRepository.findStationsByLine(lineName);
+        List<Direction> directions = directionRepository.findByLineEquals(lineName);
+
+        return Ret.buildSuc(
+                LineInfoVo.builder().line(line.get()).direction(directions).station(stationsByLine).build()
+                , "获取成功");
+    }
+
 
     private final static long TTL = 1000 * 6;
 
