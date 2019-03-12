@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class BusRealTimeSrawler extends BaseCrawLer {
 
-    public static final String URL = "http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine=2&selBDir=5702371011268233799&selBStop=3";
+    public static final String URL = "http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine={selBLine}&selBDir={selBDir}&selBStop={selBStop}";
 
     public static final String XPATH = "//article/p/text()";
 
@@ -28,7 +28,7 @@ public class BusRealTimeSrawler extends BaseCrawLer {
     BusRealTimeRepository busRealTimeRepository;
 
     public static Request buildRequest(String line, String dir, String stop) {
-        Request request = Request.build(URL, "parse").setCrawlerName("BusRealTime");
+        Request request = Request.build(URL.replace("{selBLine}", line).replace("{selBDir}", dir).replace("{selBStop}", stop), "parse").setCrawlerName("BusRealTime");
         request.getMeta().put("line", line);
         request.getMeta().put("dir", dir);
         request.getMeta().put("stop", stop);
