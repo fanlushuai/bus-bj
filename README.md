@@ -12,5 +12,5 @@
 
 - [ ] 部署
   - [ ] 服务器选择
-  - [ ] docker部署
+  - [x] docker部署  daocloud 云端dockerfile+docker镜像内部deploy+免费胶囊机部署
   - [ ] 推广
